@@ -37,7 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog',
+    'blog','custom_user',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -53,10 +53,15 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'mysite.urls'
 
+PASSWORD_HASHERS =(
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+)
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [(os.path.abspath('mysite/templates'))],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -102,4 +107,16 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+AUTH_USER_MODEL='custom_user.AuthUser'
+
+
+
+
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_HOST_USER='kalyani.andhare29@gmail.com'
+EMAIL_HOST_PASSWORD='kalyani'
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+DEFAULT_FROM_MAIL='kalyani.andhare29@gmail.com'
+EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
 

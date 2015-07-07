@@ -1,15 +1,43 @@
-{% extends "blog/base.html" %}
+{% load staticfiles %}
+<html>
+    <head>
+        <title>Kalyani's Blog</title>
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="{% static "css/blog.css" %}">
+	<link href="http://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
 
-{% block content %}
-    {% for post in posts %}
-        <div class="post">
-            <div class="date">
-                {{ post.published_date }}
-            </div>
-            <h1><a href="{% url "blog.views.post_detail" pk=post.pk %}">{{ post.title }}</a></h1>
-            <p>{{ post.text|linebreaks }}</p>
+    </head>
+    <body>
+        <div class="page-header">
+            <h1><a href="">Kalyani's Blog</a></h1>
+	    <h2><a href="/blog/register.html/">Register here</a></h2>
+          {{ user }}
+	  {% if user.is_anonymous %}
+	  <a href="{% url 'django.contrib.auth.views.login' %}">login</a>
+	  <a href="{% url 'blog.views.register' %}">Register</a>
+	  {% else %}
+	  <a href="{% url 'django.contrib.auth.views.logout' %}">logout</a>
+	  {% endif %}
+
+
         </div>
-    {% endfor %}
-{% endblock content %}
-
-
+      
+        <div class="content container">
+    		<div class="row">
+       			 <div class="col-md-8">
+         			   {% for post in posts %}
+            				    <div class="post">
+                				    <div class="date">
+                  				      {{ post.published_date }}
+                    			            </div>
+                    				    <h1><a href="">My first post</a></a></h1>
+                    				    <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+                			   </div>
+            			   {% endfor %}
+        		</div>
+    		</div>
+	</div>
+	
+    </body>
+</html>
